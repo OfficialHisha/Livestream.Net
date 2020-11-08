@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Livestream.Dlive\Livestream.Net.Dlive.csproj" />
+    <ProjectReference Include="..\Livestream.Net.Common\Livestream.Net.Common.csproj" />
+    <ProjectReference Include="..\Livestream.Net.Trovo\Livestream.Net.Trovo.csproj" />
+  </ItemGroup>
+
+</Project>
