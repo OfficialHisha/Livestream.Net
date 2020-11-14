@@ -4,16 +4,13 @@ using System.Text;
 
 namespace Livestream.Net.Common
 {
-    public class ChatMessage
+    public class ChatMessage : ChannelEvent
     {
-        public Platform Platform { get; }
-        public string Channel { get; protected set; }
-        public string Sender { get; protected set; }
-        public string Content { get; protected set; }
+        public string Content { get; }
 
-        public ChatMessage(Platform platform)
+        public ChatMessage(Platform platform, string channel, string sender, string content) : base(platform, channel, sender)
         {
-            Platform = platform;
+            Content = content;
         }
     }
 }

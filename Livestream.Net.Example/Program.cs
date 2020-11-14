@@ -18,7 +18,8 @@ namespace Livestream.Net.Example
 
             List<PlatformData> platforms = new List<PlatformData>() {
                 new PlatformData(Platform.Dlive, accounts.Value<string>("hisha-dlive")),
-                new PlatformData(Platform.Trovo, accounts.Value<string>("hisha-trovo"))
+                new PlatformData(Platform.Trovo, accounts.Value<string>("hisha-trovo")),
+                new PlatformData(Platform.Twitch, accounts.Value<string>("hishabot-twitch"))
             };
 
             LivestreamSystem system = new LivestreamSystem(platforms);
@@ -30,6 +31,7 @@ namespace Livestream.Net.Example
 
             await system.AddChannelListener(Platform.Dlive, "hisha");
             await system.AddChannelListener(Platform.Trovo, "hisha");
+            await system.AddChannelListener(Platform.Twitch, "officialhisha");
 
             await Task.Delay(Timeout.Infinite);
         }
@@ -55,7 +57,7 @@ namespace Livestream.Net.Example
             Console.ResetColor();
         }
 
-        public static void AddChatMessage(object sender, ChatMessage message)
+        public static void AddChatMessage(object sender, ChannelEvent message)
         {
             switch (message.Platform)
             {
@@ -65,11 +67,24 @@ namespace Livestream.Net.Example
                 case Platform.Trovo:
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     break;
+                case Platform.Twitch:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    break;
                 default:
                     break;
             }
 
-            Console.WriteLine($"[{DateTime.Now}] [{message.Platform}] [{message.Channel}] ({message.Sender}): {message.Content}");
+            switch (message)
+            {
+                case ChatMessage chatMessage:
+                    Console.WriteLine($"[{DateTime.Now}] [{chatMessage.Platform}] [{chatMessage.Channel}]: ({chatMessage.Sender}) {chatMessage.Content}");
+                    break;
+                case DonationEvent donationEvent:
+                    Console.WriteLine($"[{DateTime.Now}] [{donationEvent.Platform}] [{donationEvent.Channel}]: {donationEvent.Sender} donated {donationEvent.Quantity} {donationEvent.Symbol}");
+                    break;
+                default:
+                    break;
+            }
 
             Console.ResetColor();
         }

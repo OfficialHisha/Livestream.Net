@@ -7,8 +7,10 @@ namespace Livestream.Net.Common
         public IChatListener ChatListener { get; protected set; }
         public string Authorization { get; set; }
 
-        public Account()
+        public Account(IChatListener chatListener, string authorization)
         {
+            ChatListener = chatListener;
+            Authorization = authorization;
         }
     }
 }

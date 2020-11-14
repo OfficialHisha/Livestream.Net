@@ -33,7 +33,7 @@ namespace Livestream.Net.Trovo.Chat
         public string Authorization { get; set; }
 
         public event EventHandler<string> Error;
-        public event EventHandler<ChatMessage> Chat;
+        public event EventHandler<ChannelEvent> Event;
         public event EventHandler<string> Connection;
 
         public async Task AddChannelListener(string channel)
@@ -47,7 +47,13 @@ namespace Livestream.Net.Trovo.Chat
 
         public async Task Connect()
         {
-            if (connections.Count == 0) return;
+            if (connections.Count == 0)
+            {
+                // Indicate that connections are ready to be made
+                // We don't have any connections yet, so we can't do more for the time being
+                // This is just to keep it consistent in the log
+                Connection?.Invoke(this, $"Connected to {TrovoConstants.SubscriptionEndpoint}");
+            }
 
             using HttpClient http = new HttpClient();
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -86,8 +92,6 @@ namespace Livestream.Net.Trovo.Chat
             }
 
             string pageId = JObject.Parse(await channelIdResponse.Content.ReadAsStringAsync().ConfigureAwait(false)).SelectToken("data.getLiveInfo.channelInfo.id").ToObject<string>();
-
-            string t = Queries.GetToken(pageId);
 
             using HttpRequestMessage tokenRequest = new HttpRequestMessage(HttpMethod.Post, TrovoConstants.GraphQLEndpoint)
             {
@@ -188,7 +192,7 @@ namespace Livestream.Net.Trovo.Chat
                     }
                     break;
                 default:
-                    Error?.Invoke(this, $"An unknown message was received, please report on GitHub at https://github.com/OfficialHisha/DSharp/issues/new: {message}");
+                    Error?.Invoke(this, $"An unknown message was received, please report on GitHub at https://github.com/OfficialHisha/Livestream.Net/issues/new: {message}");
                     break;
             }
         }
@@ -205,13 +209,13 @@ namespace Livestream.Net.Trovo.Chat
                 case TrovoChatEventType.GIFT:
                     JObject giftData = JObject.Parse(chatEvent.Value<string>("content"));
 
-                    Chat?.Invoke(this, new TrovoChatMessage(eventType, channel, user, $"Gifted {giftData.Value<int>("num")} {giftData.Value<string>("gift")}" , giftData.Value<int>("num")));
+                    Event?.Invoke(this, new TrovoDonationEvent(channel, user, giftData.Value<string>("gift") , giftData.Value<int>("num")));
                     break;
                 case TrovoChatEventType.RAID:
-                    Chat?.Invoke(this, new TrovoChatMessage(eventType, channel, user, $"Raided the stream!"));
+                    Event?.Invoke(this, new TrovoChatMessage(eventType, channel, user, $"Raided the stream!"));
                     break;
                 default:
-                    Chat?.Invoke(this, new TrovoChatMessage(eventType, channel, user, chatEvent.Value<string>("content")));
+                    Event?.Invoke(this, new TrovoChatMessage(eventType, channel, user, chatEvent.Value<string>("content")));
                     break;
 
             }

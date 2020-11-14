@@ -5,9 +5,6 @@ namespace Livestream.Net.Dlive
 {
     public class DliveAccount : Account
     {
-        public DliveAccount()
-        {
-            ChatListener = new DliveChatListener() { Authorization = Authorization };
-        }
+        public DliveAccount(string authorization) : base(new DliveChatListener() { Authorization = authorization }, authorization) {}
     }
 }

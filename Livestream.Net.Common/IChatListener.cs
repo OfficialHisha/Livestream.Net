@@ -6,7 +6,7 @@ namespace Livestream.Net.Common
     public interface IChatListener
     {
         event EventHandler<string> Error;
-        event EventHandler<ChatMessage> Chat;
+        event EventHandler<ChannelEvent> Event;
         event EventHandler<string> Connection;
 
         Task Connect();

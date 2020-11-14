@@ -5,9 +5,6 @@ namespace Livestream.Net.Trovo
 {
     public class TrovoAccount : Account
     {
-        public TrovoAccount()
-        {
-            ChatListener = new TrovoChatListener() { Authorization = Authorization };
-        }
+        public TrovoAccount(string authorization) : base(new TrovoChatListener() { Authorization = authorization }, authorization) { }
     }
 }

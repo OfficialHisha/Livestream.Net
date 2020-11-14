@@ -31,7 +31,7 @@ namespace Livestream.Net.Dlive.Chat
         public string Authorization { get; set; }
 
         public event EventHandler<string> Error;
-        public event EventHandler<ChatMessage> Chat;
+        public event EventHandler<ChannelEvent> Event;
         public event EventHandler<string> Chest;
         public event EventHandler<string> Connection;
 
@@ -48,7 +48,7 @@ namespace Livestream.Net.Dlive.Chat
             {
                 if (connection.Channels.Contains(channel))
                 {
-                    Error?.Invoke(this, "Unable to add channel: Channel is already added");
+                    Error?.Invoke(this, $"Unable to add channel '{channel}': Channel is already added");
                     return;
                 }
             }
@@ -78,7 +78,7 @@ namespace Livestream.Net.Dlive.Chat
                 return;
             }
 
-            Error?.Invoke(this, "Unable to add channel: Channel limit reached");
+            Error?.Invoke(this, $"Unable to add channel '{channel}': Channel is already added");
         }
 
         public async Task Connect()
@@ -147,7 +147,7 @@ namespace Livestream.Net.Dlive.Chat
                     break;
                 default:
                     //Unknown type
-                    Error?.Invoke(this, $"An unknown message was received, please report on GitHub at https://github.com/OfficialHisha/DSharp/issues/new: {message}");
+                    Error?.Invoke(this, $"An unknown message was received, please report on GitHub at https://github.com/OfficialHisha/Livestream.Net/issues/new: {message}");
                     break;
             }
         }
@@ -156,7 +156,18 @@ namespace Livestream.Net.Dlive.Chat
         {
             await Task.Yield();
 
-            Chat?.Invoke(this, new DliveChatMessage(channel.Split("_")[0], chatEvent.SelectToken("sender.displayname")?.ToString() ?? "System", chatEvent.Value<string>("content")));
+            Enum.TryParse(chatEvent.Value<string>("type").ToUpper(), out DliveChatEventType type);
+
+            switch (type)
+            {
+                case DliveChatEventType.GIFT:
+                    Event?.Invoke(this, new DliveDonationEvent(channel.Split("_")[0], chatEvent.SelectToken("sender.displayname")?.ToString() ?? "System", chatEvent.Value<string>("gift"), chatEvent.Value<int>("amount")));
+                    break;
+                default:
+                    Event?.Invoke(this, new DliveChatMessage(type, channel.Split("_")[0], chatEvent.SelectToken("sender.displayname")?.ToString() ?? "System", chatEvent.Value<string>("content")));
+                    break;
+            }
+
         }
 
         private async Task BuildChestMessage(string channel, dynamic data)

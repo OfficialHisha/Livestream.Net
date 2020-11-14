@@ -1,6 +1,6 @@
 ﻿namespace Livestream.Net.Dlive.Chat
 {
-    class DliveChatUser
+    public class DliveChatUser
     {
     }
 }

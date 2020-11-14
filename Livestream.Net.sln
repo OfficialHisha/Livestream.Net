@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livestream.Net", "Livestream.Net\Livestream.Net.csproj", "{6FAED0C3-78F1-4F86-B411-8D670E6E718D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livestream.Net.Dlive", "Livestream.Dlive\Livestream.Net.Dlive.csproj", "{1DB19887-88EE-47BD-99D0-D70C5C212371}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livestream.Net.Trovo", "Livestream.Net.Trovo\Livestream.Net.Trovo.csproj", "{CE0F0FF9-BFA0-4E6C-8FAE-A7E202C9DCA3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livestream.Net.Common", "Livestream.Net.Common\Livestream.Net.Common.csproj", "{DB42ADE6-2938-4576-85D2-B9E8854AB328}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livestream.Net.Example", "Livestream.Net.Example\Livestream.Net.Example.csproj", "{51F28D08-0339-4EAA-B967-5BFFECE78892}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livestream.Net.Dlive", "Livestream.Net.Dlive\Livestream.Net.Dlive.csproj", "{BAD423C3-9991-494B-AC1B-CECF1D7E8AF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livestream.Net.Twitch", "Livestream.Net.Twitch\Livestream.Net.Twitch.csproj", "{C25BBCFB-8B9E-44C4-BE06-2A4A5253392D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +25,6 @@ Global
 		{6FAED0C3-78F1-4F86-B411-8D670E6E718D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FAED0C3-78F1-4F86-B411-8D670E6E718D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FAED0C3-78F1-4F86-B411-8D670E6E718D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1DB19887-88EE-47BD-99D0-D70C5C212371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DB19887-88EE-47BD-99D0-D70C5C212371}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DB19887-88EE-47BD-99D0-D70C5C212371}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DB19887-88EE-47BD-99D0-D70C5C212371}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE0F0FF9-BFA0-4E6C-8FAE-A7E202C9DCA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE0F0FF9-BFA0-4E6C-8FAE-A7E202C9DCA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE0F0FF9-BFA0-4E6C-8FAE-A7E202C9DCA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +37,14 @@ Global
 		{51F28D08-0339-4EAA-B967-5BFFECE78892}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51F28D08-0339-4EAA-B967-5BFFECE78892}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51F28D08-0339-4EAA-B967-5BFFECE78892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD423C3-9991-494B-AC1B-CECF1D7E8AF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD423C3-9991-494B-AC1B-CECF1D7E8AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD423C3-9991-494B-AC1B-CECF1D7E8AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD423C3-9991-494B-AC1B-CECF1D7E8AF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C25BBCFB-8B9E-44C4-BE06-2A4A5253392D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C25BBCFB-8B9E-44C4-BE06-2A4A5253392D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C25BBCFB-8B9E-44C4-BE06-2A4A5253392D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C25BBCFB-8B9E-44C4-BE06-2A4A5253392D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
