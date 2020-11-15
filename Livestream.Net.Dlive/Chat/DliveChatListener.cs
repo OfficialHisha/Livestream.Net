@@ -110,7 +110,7 @@ namespace Livestream.Net.Dlive.Chat
 
             _ = Receive(connection, CancellationToken.None);
 
-            Connection?.Invoke(this, $"Connected to {DliveConstants.SubscriptionEndpoint}");
+            Connection?.Invoke(this, $"Connected to Dlive");
         }
 
         async Task Receive(Connection conn, CancellationToken cancellationToken)

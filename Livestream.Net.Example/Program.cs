@@ -19,7 +19,7 @@ namespace Livestream.Net.Example
             List<PlatformData> platforms = new List<PlatformData>() {
                 new PlatformData(Platform.Dlive, accounts.Value<string>("hisha-dlive")),
                 new PlatformData(Platform.Trovo, accounts.Value<string>("hisha-trovo")),
-                new PlatformData(Platform.Twitch, accounts.Value<string>("hishabot-twitch"))
+                new PlatformData(Platform.Twitch, accounts.Value<string>("hisha-twitch"))
             };
 
             LivestreamSystem system = new LivestreamSystem(platforms);
@@ -36,7 +36,7 @@ namespace Livestream.Net.Example
             await Task.Delay(Timeout.Infinite);
         }
 
-        public static void AddLogEntry(object sender, LogMessage log)
+        static void AddLogEntry(object sender, LogMessage log)
         {
             if (LogLevel > log.Severity) return;
 
@@ -57,7 +57,7 @@ namespace Livestream.Net.Example
             Console.ResetColor();
         }
 
-        public static void AddChatMessage(object sender, ChannelEvent message)
+        static void AddChatMessage(object sender, ChannelEvent message)
         {
             switch (message.Platform)
             {

@@ -1,7 +1,7 @@
 ﻿using Livestream.Net.Common;
 using Livestream.Net.Twitch.Chat;
 
-namespace Livestream.Net.Trovo
+namespace Livestream.Net.Twitch
 {
     public class TwitchAccount : Account
     {

@@ -52,7 +52,7 @@ namespace Livestream.Net.Trovo.Chat
                 // Indicate that connections are ready to be made
                 // We don't have any connections yet, so we can't do more for the time being
                 // This is just to keep it consistent in the log
-                Connection?.Invoke(this, $"Connected to {TrovoConstants.SubscriptionEndpoint}");
+                Connection?.Invoke(this, $"Connected to Trovo");
             }
 
             using HttpClient http = new HttpClient();
